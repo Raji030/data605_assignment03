@@ -1,0 +1,250 @@
+---
+title: "Data605_Assignment03"
+author: "Mahmud Hasan Al Raji"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Problem Set1:
+
+1.What is the rank of the matrix $A$ =  $\begin{bmatrix}
+                                          1 & 2 & 3 & 4 \\
+                                         -1 & 0 & 1 & 3 \\
+                                          0 & 1 & -2 & 1 \\
+                                          5 & 4 & -2 & -3 \\
+                                          \end{bmatrix}$
+
+   
+
+Ans-1: Performing row transformations to make the matrix into echelon form:
+
+$R_2 = R_2 + R_1,$ $A$ = $\begin{bmatrix}
+                1 & 2 & 3 & 4 \\
+               0 & 2 & 4 & 7 \\
+               0 & 1 & -2 & 1 \\
+               5 & 4 & -2 & -3 \\
+               \end{bmatrix}$ 
+
+
+$R_4 = R_4 - 5R_1,$ $A$=  $\begin{bmatrix}
+                1 & 2 & 3 & 4 \\
+               0 & 2 & 4 & 7 \\
+               0 & 1 & -2 & 1 \\
+               0 & -6 & -17 & -23 \\
+               \end{bmatrix}$
+
+
+$R_2 = R_2/2,$  $A$ =  $\begin{bmatrix}
+                1 & 2 & 3 & 4 \\
+               0 & 1 & 2 & 7/2 \\
+               0 & 1 & -2 & 1 \\
+               0 & -6 & -17 & -23 \\
+               \end{bmatrix}$
+
+$R_3 = R_3 - R_2,$ $A$ =  $\begin{bmatrix}
+                1 & 2 & 3 & 4 \\
+               0 & 1 & 2 & 7/2 \\
+               0 & 0 & -4 & -5/2 \\
+               0 & -6 & -17 & -23 \\
+               \end{bmatrix}$
+
+$R_4 = R_4 + 6R_2,$ $A$ = $\begin{bmatrix}
+               1 & 2 & 3 & 4 \\
+               0 & 1 & 2 & 7/2 \\
+               0 & 0 & -4 & -5/2 \\
+               0 & 0 & -5 & -2 \\
+               \end{bmatrix}$
+               
+$R_3 = R_3 / (-4),$  $A$ = $\begin{bmatrix}
+               1 & 2 & 3 & 4 \\
+               0 & 1 & 2 & 7/2 \\
+               0 & 0 & 1 & 5/8 \\
+               0 & 0 & -5 & -2 \\
+               \end{bmatrix}$
+               
+$R_4 = R_4 + 5R_3,$  $A$ = $\begin{bmatrix}
+               1 & 2 & 3 & 4 \\
+               0 & 1 & 2 & 7/2 \\
+               0 & 0 & 1 & 5/8 \\
+               0 & 0 & 0 & 9/8 \\
+               \end{bmatrix}$
+
+
+The matrix above is in row echelon form and the number of non-zero row is 4. 
+
+Hence, the rank of the matrix A is 4.
+
+# Test result for ans-1:
+
+```{r }
+library(matrixcalc)
+
+A<-matrix(c(1,-1,0,5,2,0,1,4,3,1,-2,-2,4,3,1,-3),nrow=4)
+A
+matrix.rank(A)
+```
+
+ 2. Given an mxn matrix where m > n, what can be the maximum rank? The minimum rank, assuming that the matrix is non-zero?
+
+Ans-2: As the given matrix is non-zeron and the order is m x n , where, m > n , therefore, the maximum rank of the matrix could be n and the minimum rank of the matrix could be 1. 
+
+
+ 3. What is the rank of matrix $B$ = $\begin{bmatrix}
+                                    1 & 2 & 1 \\
+                                    3 & 6 & 3 \\
+                                    2 & 4 & 2\\
+                                   \end{bmatrix}$ 
+                                    
+Ans-3: Performing row transformations to make the matrix into echelon form:
+
+$R_2 = R_2- 3R_1,$ $B$ = $\begin{bmatrix}
+                    1 & 2 & 1 \\
+                    0 & 0 & 0 \\
+                    2 & 4 & 2\\
+                    \end{bmatrix}$
+
+$R_2= R_3 - 2R_1,$ $B$ = $\begin{bmatrix}
+                      1 & 2 & 1 \\
+                      0 & 0 & 0 \\
+                      0 & 0 & 0\\
+                      \end{bmatrix}$ 
+
+The matrix above is in echelon form and has one non-zero row. 
+Therefore, the rank of the matrix B is 1.
+
+# Test result for ans-3:
+
+```{r}
+B<-matrix(c(1,3,2,2,6,4,1,3,2),nrow=3)
+B
+matrix.rank(B)
+```
+
+# Problem Set 2: 
+1. Compute the eigenvalues and eigenvectors of the matrix A. You’ll need to show your work. You’ll need to write out the characteristic polynomial and show your solution. $A$ = $\begin{bmatrix}
+                                                                        1 & 2 & 3 \\
+                                                                        0 &  4& 5 \\
+                                                                        0 & 0 & 6\\
+                                                                        \end{bmatrix}$ 
+
+Ans-1: The given matrix is a 3 x 3 matrix. The eigenvalues will be the roots of the characteristic polynomial equation of the matrix A. The polynomial will be: $f(\lambda)=det(A-\lambda I_3)$ 
+
+Eigenvalues:
+
+Now, matrix $A-\lambda I_3$ = $\begin{bmatrix}1 & 2 & 3 \\ 0 &  4& 5 \\ 0 & 0 & 6\\ \end{bmatrix}$ $-$ $\lambda$ $\begin{bmatrix} 1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 1\\ \end{bmatrix}$ 
+
+= $\begin{bmatrix}1 & 2 & 3 \\ 0 &  4& 5 \\ 0 & 0 & 6\\ \end{bmatrix}$ $-$ $\begin{bmatrix} \lambda & 0 & 0\\ 0 & \lambda & 0\\ 0 & 0 & \lambda\\ \end{bmatrix}$
+
+= $\begin{bmatrix} 1-\lambda & 2 & 3\\ 0 & 4-\lambda & 5\\ 0 & 0 & 6-\lambda\\ \end{bmatrix}$
+
+The determinant of matrix $A-\lambda I_3$ $=$ $(1-\lambda)(4-\lambda)(6-\lambda)$ $-$ $2(0-0)$ $+$ $3(0-0)$
+                                    $=$ $(1-\lambda)(4-\lambda)(6-\lambda)$
+                                    $=$ $(1-\lambda)(\lambda^2-10\lambda+24)$ 
+                                    $=$ $\lambda^2-10\lambda+24-\lambda^3+10\lambda^2-24\lambda$
+                                    $=$ $-\lambda^3+11\lambda^2-34\lambda+24$
+                                    
+Therefore, the characteristic polynomial of the matrix A is $-\lambda^3+11\lambda^2-34\lambda+24$
+                    
+Hence, the characteristic polynomial equation is  $-\lambda^3+11\lambda^2-34\lambda+24$ $=$ $0$. By solving this equation we get the eigenvalues. 
+
+Now, $-\lambda^3+11\lambda^2-34\lambda+24$ $=$ $0$
+
+  or $\lambda^2-\lambda^3-10\lambda+10\lambda^2+24-24\lambda$ $=$ $0$
+  
+  or $\lambda^2(1-\lambda)-10\lambda(1-\lambda)+24(1-\lambda)$ $=$ $0$
+  
+  or $(1-\lambda)(\lambda^2-10\lambda+24)$ $=$ $0$
+  
+  or $(1-\lambda)(4-\lambda)(6-\lambda)$ $=$ $0$
+
+So, $\lambda$ $=$ $1$, $\lambda$ $=$ $4$, and $\lambda$ $=$ $6$
+
+Therefore, the eigenvalues are 1,4 and 6
+                                                                   
+Eigenvectors:
+
+Case-1: 
+$\lambda = 1$,
+
+$\begin{bmatrix}A-\lambda I \end{bmatrix}$ $\begin{bmatrix} X \end{bmatrix}$ $=$ $0$ 
+
+or $\begin{bmatrix} 1-\lambda & 2 & 3\\ 0 & 4-\lambda & 5\\ 0 & 0 & 6-\lambda\\ \end{bmatrix}$ $\begin{bmatrix} X \end{bmatrix}$ $=$ $0$
+
+Putting $\lambda = 1$  we get,
+
+$\begin{bmatrix} 0 & 2 & 3\\ 0 & 3 & 5\\ 0 & 0 & 5\\ \end{bmatrix}$ $\begin{bmatrix} X \end{bmatrix}$ $=$ $0$
+                                                                        
+$X_1$ is free as first pivot is 0. Let, $X_1$ $=$ $1$
+
+$so$, $3X_2$ $+$ $5X_3$ $=$ $0$
+   and $5X_3$ $=$ $0$ 
+   
+Solving the equations we get, $X_2$ $=$ $0$ and $X_3$ $=$ $0$
+
+Hence, the eigenvector for $\lambda = 1$ is $\begin{bmatrix}X \end{bmatrix}$ $=$ $\begin{bmatrix} 1\\0\\0 \end{bmatrix}$                                                                
+                                                                       
+
+Case-2: 
+
+$\lambda = 4$,
+
+$\begin{bmatrix}A-\lambda I \end{bmatrix}$ $\begin{bmatrix} X \end{bmatrix}$ $=$ $0$ 
+
+or $\begin{bmatrix} 1-\lambda & 2 & 3\\ 0 & 4-\lambda & 5\\ 0 & 0 & 6-\lambda\\ \end{bmatrix}$ $\begin{bmatrix} X \end{bmatrix}$ $=$ $0$
+
+Putting $\lambda = 4$  we get,
+
+$\begin{bmatrix} -3 & 2 & 3\\ 0 & 0 & 5\\ 0 & 0 & 2\\ \end{bmatrix}$ $\begin{bmatrix} X \end{bmatrix}$ $=$ $0$
+                                                                        
+$X_2$ is free as second pivot is 0. Let, $X_2$ $=$ $1$
+
+$so$, $-3X_1$ $+$ $2X_2$ $+$ $3X_3$ $=$ $0$
+   and $2X_3$ $=$ $0$ 
+   
+Solving the equations we get, $X_1$ $=$ $2/3$ and $X_3$ $=$ $0$
+
+Hence, the eigenvector for $\lambda = 4$ is $\begin{bmatrix}X \end{bmatrix}$ $=$ $\begin{bmatrix} 2/3\\1\\0 \end{bmatrix}$ 
+
+
+Case-3: 
+
+$\lambda = 6$,
+
+$\begin{bmatrix}A-\lambda I \end{bmatrix}$ $\begin{bmatrix} X \end{bmatrix}$ $=$ $0$ 
+
+or $\begin{bmatrix} 1-\lambda & 2 & 3\\ 0 & 4-\lambda & 5\\ 0 & 0 & 6-\lambda\\ \end{bmatrix}$ $\begin{bmatrix} X \end{bmatrix}$ $=$ $0$
+
+Putting $\lambda = 6$  we get,
+
+$\begin{bmatrix} -5 & 2 & 3\\ 0 & -2 & 5\\ 0 & 0 & 0\\ \end{bmatrix}$ $\begin{bmatrix} X \end{bmatrix}$ $=$ $0$
+                                                                        
+$X_3$ is free as third pivot is 0. Let, $X_3$ $=$ $1$
+
+$so$, $-5X_1$ $+$ $2X_2$ $+$ $3X_3$ $=$ $0$
+   and $-2X_2$ $+$ $5X_3$ $=$ $0$ 
+   
+Solving the equations we get, $X_1$ $=$ $8/5$ and $X_2$ $=$ $5/2$
+
+Hence, the eigenvector for $\lambda = 6$ is $\begin{bmatrix}X \end{bmatrix}$ $=$ $\begin{bmatrix} 8/5\\5/2\\1 \end{bmatrix}$ 
+
+# Eigenvalues and eigenvectors finding by R:
+
+```{r }
+A<-matrix(c(1,0,0,2,4,0,3,5,6),nrow=3)
+A
+E<-eigen(A)
+E$values
+E$vectors
+```
+
+
+
+
+
+
+
